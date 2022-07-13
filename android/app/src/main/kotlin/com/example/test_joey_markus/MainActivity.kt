@@ -4,5 +4,5 @@ import io.flutter.embedding.android.FlutterActivity
 
 class MainActivity: FlutterActivity() {
 }
-class test: FlutterActivity() {
+class tes: FlutterActivity() {
 }
