@@ -4,5 +4,3 @@ import io.flutter.embedding.android.FlutterActivity
 
 class MainActivity: FlutterActivity() {
 }
-class test6575: FlutterActivity() {
-}
