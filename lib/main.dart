@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -40,8 +41,9 @@ class _MyHomePageState extends State<MyHomePage> {
       body: PageView(
         controller: controller,
         children: const [
-        DetailPage(headline: 'Heute'),
-        DetailPage(headline: 'Gesterb'),
+        DetailPage(headline: 'Heute', daysInPast: 0),
+        DetailPage(headline: 'Gestern', daysInPast: 1),
+          DetailPage(headline: 'Vorgestern', daysInPast: 2),
       ],)
       // This trailing comma makes auto-formatting nicer for build methods.
     );
@@ -49,9 +51,10 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({Key? key, required this.headline}) : super(key: key);
+  const DetailPage({Key? key, required this.headline, required this.daysInPast }) : super(key: key);
 
   final String headline;
+  final int daysInPast;
   @override
   State<DetailPage> createState() => _DetailPageState();
 }
@@ -63,9 +66,9 @@ class _DetailPageState extends State<DetailPage> {
       padding: const EdgeInsetsDirectional.fromSTEB(0.0, 48.0, 0.0, 32.0),
       child: Column(children: [
         Text(widget.headline, style: const TextStyle(fontSize: 48.0, color: Colors.white)),
-        const TrackingElement(color: Color(0x2496EA05), iconData: Icons.directions_run, unit: 'Steps', max: 5000),
-        const TrackingElement(color: Color(0xF913D7A3), iconData: Icons.local_drink, unit: 'l', max: 3),
-        const TrackingElement(color: Color(0xDD811285), iconData: Icons.fastfood, unit: 'pieces', max: 1800),
+         TrackingElement(color: const Color(0x2496EA05), iconData: Icons.directions_run, unit: 'Steps', max: 5000, daysInPast: widget.daysInPast,),
+         TrackingElement(color: const Color(0xF913D7A3), iconData: Icons.local_drink, unit: 'l', max: 3, daysInPast: widget.daysInPast,),
+         TrackingElement(color: const Color(0xDD811285), iconData: Icons.fastfood, unit: 'pieces', max: 1800, daysInPast: widget.daysInPast,),
       ],),
     );
   }
@@ -74,30 +77,59 @@ class _DetailPageState extends State<DetailPage> {
 
 class TrackingElement extends StatefulWidget {
   const TrackingElement({Key? key, required this.color, required this.iconData, 
-    required this.unit, required this.max }) : super(key: key);
+    required this.unit, required this.max, required this.daysInPast }) : super(key: key);
 
   final Color color;
   final IconData iconData;
   final String unit;
   final double max;
+  final int daysInPast;
   
   @override
   State<TrackingElement> createState() => _TrackingElementState();
 }
 
 class _TrackingElementState extends State<TrackingElement> {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   int _counter = 0;
   double _progress = 0;
-   _incrementCounter() {
+  var now = DateTime.now();
+String _storageKey ='';
+
+   _incrementCounter() async {
   setState(() {
       _counter += 200;
-      _progress = _counter / widget.max;  
+      _progress = _counter / widget.max;
   });
+  (await _prefs).setInt(_storageKey, _counter);
   }
   @override
+  void initState() async {
+     super.initState();
+
+      _storageKey = '${now.year}-${now.month}-${now.day - widget.daysInPast} ${widget.unit}';
+
+
+
+
+
+  }
+
+  @override
+  void didChangeDependencies(){
+    super.didChangeDependencies();
+     _prefs.then( (prefs) {
+      setState(()
+      {_counter = prefs.getInt(_storageKey) ?? 0;
+      _progress = _counter / widget.max;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return InkWell(
+     return InkWell(
         onTap: _incrementCounter(),
         child: Column(
       children:  <Widget>[
