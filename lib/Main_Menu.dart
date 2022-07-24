@@ -7,15 +7,18 @@ void main(){
 class Main_Menu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return MaterialApp( buildScaf(););
+  }
+
+  Scaffold buildScaf() {
+    return Scaffold(
       body: Center(
-              child: Image(
-                  image: AssetImage('Source/Logo.jpeg'),
-                height: 400,
-                width: 400,
-                alignment: Alignment(0.0, -0.5),
-              ),
-          ),
+        child: Image(
+          image: AssetImage('assets/Logo.jpeg'),
+          height: 400,
+          width: 400,
+          alignment: Alignment(0.0, -0.5),
+        ),
       ),
     );
   }
