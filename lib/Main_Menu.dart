@@ -47,7 +47,7 @@ class Login_StateGenerator extends State<Login>{
               textAlignVertical: TextAlignVertical.center,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Benutzername'
+                labelText: 'username'
               ),
               onSubmitted: (String value) async{_username = value;},
             ),
@@ -57,7 +57,7 @@ class Login_StateGenerator extends State<Login>{
               textAlignVertical: TextAlignVertical.center,
               decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Passwort'
+                  labelText: 'password'
               ),
               onSubmitted: (String value) async{_password = value;},
             ),
@@ -69,7 +69,7 @@ class Login_StateGenerator extends State<Login>{
   }
 
   void tryToLogin(String username, String password) {
-    if(_password=="admin") {
+    if(password=="admin") {
       Navigator.of(context).push(
         MaterialPageRoute<void>(builder: (BuildContext context) {
           final _username = username;
@@ -79,7 +79,7 @@ class Login_StateGenerator extends State<Login>{
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text('nfsdbfhss'),
+                    Text('This is the Main Menu'),
                   ]
               ),
             ),
