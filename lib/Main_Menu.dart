@@ -61,27 +61,31 @@ class Login_StateGenerator extends State<Login>{
               ),
               onSubmitted: (String value) async{_password = value;},
             ),
-            TextButton(onPressed: (){tryToLogin(_username);}, child: const Text("Einloggen"))
+            TextButton(onPressed: (){tryToLogin(_username, _password);}, child: const Text("Einloggen"))
           ]
       ),
       ),
     );
   }
 
-  void tryToLogin(String username) {
-    Navigator.of(context).push(MaterialPageRoute<void>(builder: (BuildContext context){
-      final _username = username;
-      return Scaffold(
-        body: Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('nfsdbfhss'),
-              ]
-          ),
-        ),
+  void tryToLogin(String username, String password) {
+    if(_password=="admin") {
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(builder: (BuildContext context) {
+          final _username = username;
+          final _password = password;
+          return Scaffold(
+            body: Center(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('nfsdbfhss'),
+                  ]
+              ),
+            ),
+          );
+        }),
       );
-    }),
-    );
+    }
   }
 }
