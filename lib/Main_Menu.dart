@@ -3,10 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 void main(){
-  runApp(MainMenu_Generator());
+  runApp(Login_Generator());
 }
 
-class MainMenu_Generator extends StatelessWidget {
+class Login_Generator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,17 +14,17 @@ class MainMenu_Generator extends StatelessWidget {
       theme: ThemeData(
         backgroundColor: Colors.cyanAccent
       ),
-      home : MainMenu()
+      home : Login()
     );
   }
 }
 
-class MainMenu extends StatefulWidget{
+class Login extends StatefulWidget{
   @override
-  State<StatefulWidget> createState() => MainMenu_StateGenerator();
+  State<StatefulWidget> createState() => Login_StateGenerator();
 }
 
-class MainMenu_StateGenerator extends State<MainMenu>{
+class Login_StateGenerator extends State<Login>{
   String _username = "";
   String _password = "";
   @override
@@ -61,9 +61,27 @@ class MainMenu_StateGenerator extends State<MainMenu>{
               ),
               onSubmitted: (String value) async{_password = value;},
             ),
+            TextButton(onPressed: (){tryToLogin(String _username);}, child: const Text("Einloggen"))
           ]
       ),
       ),
+    );
+  }
+
+  void tryToLogin(String username) {
+    Navigator.of(context).push(MaterialPageRoute<void>(builder: (BuildContext context){
+      final _username = username;
+      return Scaffold(
+        body: Center(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('nfsdbfhss'),
+              ]
+          ),
+        ),
+      );
+    }),
     );
   }
 }
