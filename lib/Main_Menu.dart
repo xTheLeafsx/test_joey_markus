@@ -38,9 +38,10 @@ class MainMenu_StateGenerator extends State<MainMenu>{
               image: AssetImage('assets/Logo_round.jpeg'),
               height: 170,
               width: 170,
-              alignment: Alignment(0.0, -1.0),
             ),
+            const SizedBox(height: 5), //Test
             Text('SafetyCar'),
+            const SizedBox(height: 20), //Test
             TextField(
               maxLines: 1,
               textAlignVertical: TextAlignVertical.center,
@@ -50,6 +51,7 @@ class MainMenu_StateGenerator extends State<MainMenu>{
               ),
               onSubmitted: (String value) async{_username = value;},
             ),
+            const SizedBox(height: 5), //Test
             TextField(
               maxLines: 1,
               textAlignVertical: TextAlignVertical.center,
