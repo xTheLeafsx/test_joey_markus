@@ -11,9 +11,6 @@ class Login_Generator extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Safety Car',
-      theme: ThemeData(
-        backgroundColor: Colors.cyanAccent
-      ),
       home : Login()
     );
   }
@@ -39,9 +36,9 @@ class Login_StateGenerator extends State<Login>{
               height: 170,
               width: 170,
             ),
-            const SizedBox(height: 5), //Test
+            const SizedBox(height: 10), //Test
             Text('SafetyCar'),
-            const SizedBox(height: 20), //Test
+            const SizedBox(height: 120), //Test
             TextField(
               maxLines: 1,
               textAlignVertical: TextAlignVertical.center,
@@ -51,7 +48,7 @@ class Login_StateGenerator extends State<Login>{
               ),
               onSubmitted: (String value) async{_username = value;},
             ),
-            const SizedBox(height: 5), //Test
+            const SizedBox(height: 15), //Test
             TextField(
               maxLines: 1,
               textAlignVertical: TextAlignVertical.center,
@@ -61,31 +58,33 @@ class Login_StateGenerator extends State<Login>{
               ),
               onSubmitted: (String value) async{_password = value;},
             ),
-            TextButton(onPressed: (){tryToLogin(_username, _password);}, child: const Text("Einloggen"))
+            TextButton(onPressed: (){tryToLogin(_username, _password, context);}, child: const Text("Einloggen")),
           ]
       ),
       ),
     );
   }
 
-  void tryToLogin(String username, String password) {
-    if(password=="admin") {
+  void tryToLogin(String username, String password, BuildContext context) {
+      final String _username = username;
+      String _password = 'Furz';
+      _password = password;
+      String out = "Main Menu$_password";
+      //if(_password=='admin') {
       Navigator.of(context).push(
         MaterialPageRoute<void>(builder: (BuildContext context) {
-          final _username = username;
-          final _password = password;
           return Scaffold(
             body: Center(
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text('This is the Main Menu'),
+                    Text(out),
                   ]
               ),
             ),
           );
         }),
       );
-    }
+    //}
   }
 }
