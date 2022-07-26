@@ -61,7 +61,7 @@ class Login_StateGenerator extends State<Login>{
               ),
               onSubmitted: (String value) async{_password = value;},
             ),
-            TextButton(onPressed: (){tryToLogin(String _username);}, child: const Text("Einloggen"))
+            TextButton(onPressed: (){tryToLogin(_username);}, child: const Text("Einloggen"))
           ]
       ),
       ),
