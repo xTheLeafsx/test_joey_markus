@@ -24,6 +24,8 @@ class Login extends StatefulWidget{
 class Login_StateGenerator extends State<Login>{
   String _username = "";
   String _password = "";
+  bool _showPassword = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +44,6 @@ class Login_StateGenerator extends State<Login>{
             TextField(
               maxLines: 1,
               textAlignVertical: TextAlignVertical.center,
-              selectionWidthStyle: BoxWidthStyle(),
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'username'
@@ -53,9 +54,20 @@ class Login_StateGenerator extends State<Login>{
             TextField(
               maxLines: 1,
               textAlignVertical: TextAlignVertical.center,
+              obscureText: !this._showPassword,
               decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'password'
+                  labelText: 'password',
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                    Icons.remove_red_eye,
+                    color: this._showPassword ? Colors.blue : Colors.grey,
+                    ),
+                    onPressed: ()
+                    {
+                      setState(() => this._showPassword != this._showPassword);
+                    },
+                  ),
               ),
               onSubmitted: (String value) async{_password = value;},
             ),
