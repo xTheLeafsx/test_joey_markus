@@ -32,7 +32,7 @@ class Login_StateGenerator extends State<Login>{
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image(
-              image: AssetImage('assets/Logo_round.jpeg'),
+              image: AssetImage('assets/Logo_round.png'),
               height: 170,
               width: 170,
             ),
