@@ -42,6 +42,7 @@ class Login_StateGenerator extends State<Login>{
             TextField(
               maxLines: 1,
               textAlignVertical: TextAlignVertical.center,
+              selectionWidthStyle: BoxWidthStyle(),
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'username'
