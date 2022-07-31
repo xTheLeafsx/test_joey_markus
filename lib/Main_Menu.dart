@@ -33,7 +33,7 @@ class Login_StateGenerator extends State<Login>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(220, 220,220,220),
+      backgroundColor: const Color.fromARGB(220,220,220,220),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -114,7 +114,8 @@ class MainMenuScaffold extends State<MainMenuState> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(children: <Widget>[
+        child: Column(
+            children: <Widget>[
               new Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,7 +143,7 @@ class MainMenuScaffold extends State<MainMenuState> {
                     IconButton(onPressed: lookIntoCar(), icon: ImageIcon(
                       AssetImage('assets/Example_car.jpg'),
                       size: 200,
-                      ),
+                    ),
                     ),
                   ]
                 ),
