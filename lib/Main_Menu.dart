@@ -116,27 +116,28 @@ class MainMenuScaffold extends State<MainMenuState> {
       body: Center(
         child: Column(
             children: <Widget>[
-              new Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+              new Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: 100),
+                    IconButton(onPressed: settings(), icon: Icon(
+                      Icons.settings,
+                    ),
+                    ),
+                    Text("Hallo,", style:TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    Text("Benutzer", style:TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  ]),
+              new Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text("Hallo,", style:TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     Text("Benutzer", style:TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   ]
               ),
-              new Column(children: <Widget>[
-                new Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(height: 100),
-                  IconButton(onPressed: settings(), icon: Icon(
-                    Icons.settings,
-                    ),
-                  ),
-                ]),
-                new Row(
+              new Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text('Your Garage'),
@@ -146,8 +147,6 @@ class MainMenuScaffold extends State<MainMenuState> {
                     ),
                     ),
                   ]
-                ),
-              ]
               ),
             ]
         ),
