@@ -116,7 +116,16 @@ class MainMenuScaffold extends State<MainMenuState> {
       body: Center(
         child: Column(
             children: <Widget>[
-              new Row(
+              new Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text("Hallo,", style:TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    SizedBox(height: 8),
+                    Text("Benutzer", style:TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                    ]
+              ),
+              new Column(children: <Widget>[
+                new Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -126,18 +135,19 @@ class MainMenuScaffold extends State<MainMenuState> {
                     Icons.settings,
                     ),
                   ),
-                ]
-              ),
-              new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text('Your Garage'),
-                  IconButton(onPressed: lookIntoCar(), icon: ImageIcon(
-                    AssetImage('assets/Example_car.jpg'),
-                    size: 200,
+                ]),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('Your Garage'),
+                    IconButton(onPressed: lookIntoCar(), icon: ImageIcon(
+                      AssetImage('assets/Example_car.jpg'),
+                      size: 200,
+                      ),
                     ),
-                  ),
-                ]
+                  ]
+                ),
+              ]
               ),
             ]
         ),
