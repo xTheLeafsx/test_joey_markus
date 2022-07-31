@@ -118,10 +118,10 @@ class MainMenuScaffold extends State<MainMenuState> {
             children: <Widget>[
               new Column(
                 mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text("Hallo,", style:TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                    SizedBox(height: 8),
-                    Text("Benutzer", style:TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                    Text("Benutzer", style:TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     ]
               ),
               new Column(children: <Widget>[
