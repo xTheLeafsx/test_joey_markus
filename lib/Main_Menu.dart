@@ -6,6 +6,10 @@ void main(){
   runApp(Login_Generator());
 }
 
+class GlobalVariables{
+  static String password ='';
+}
+
 class Login_Generator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -29,17 +33,18 @@ class Login_StateGenerator extends State<Login>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(220, 220,220,220),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image(
               image: AssetImage('assets/Logo_round.png'),
-              height: 170,
-              width: 170,
+              height: 165,
+              width: 165,
             ),
             const SizedBox(height: 10), //Test
-            Text('SafetyCar'),
+            Text('Safety Car',style: const TextStyle(fontWeight: FontWeight.bold),),
             const SizedBox(height: 120), //Test
             TextField(
               maxLines: 1,
@@ -60,44 +65,86 @@ class Login_StateGenerator extends State<Login>{
                   labelText: 'password',
                   suffixIcon: IconButton(
                     icon: Icon(
-                    Icons.remove_red_eye,
-                    color: this._showPassword ? Colors.blue : Colors.grey,
+                      Icons.remove_red_eye,
+                      color: this._showPassword ? Colors.blue : Colors.grey,
                     ),
                     onPressed: ()
                     {
-                      setState(() => this._showPassword != this._showPassword);
+                      setState(() => this._showPassword = !this._showPassword);
                     },
                   ),
               ),
-              onSubmitted: (String value) async{_password = value;},
+              onSubmitted: (String value) async{_password = value;GlobalVariables.password = value;},
             ),
-            TextButton(onPressed: (){tryToLogin(_username, _password, context);}, child: const Text("Einloggen")),
+            TextButton(onPressed: (){tryToLogin(_username, _password);}, child: const Text("login")),
           ]
       ),
       ),
     );
   }
 
-  void tryToLogin(String username, String password, BuildContext context) {
-      final String _username = username;
-      String _password = 'Furz';
-      _password = password;
-      String out = "Main Menu$_password";
-      //if(_password=='admin') {
+  void tryToLogin(String username, String password) {
       Navigator.of(context).push(
         MaterialPageRoute<void>(builder: (BuildContext context) {
-          return Scaffold(
-            body: Center(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(out),
-                  ]
-              ),
-            ),
-          );
+          final String _username = username;
+          final String _password = password;
+          if(_password.compareTo('admin')==0) {
+            return MainMenuState();
+          }else{
+            return AlertDialog(
+              title: const Text('Wrong Password'),
+              content: Text('You entered a wrong password'),
+              actions: <Widget>[
+                TextButton(onPressed: (){Navigator.pop(context);}, child: const Text('Try again')),
+              ],
+            );
+          }
         }),
       );
     //}
   }
+}
+
+class MainMenuState extends StatefulWidget{
+  @override
+  State<StatefulWidget> createState() => MainMenuScaffold();
+}
+
+class MainMenuScaffold extends State<MainMenuState> {
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+            children: <Widget>[
+              new Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  IconButton(onPressed: settings(), icon: Icon(
+                    Icons.settings,
+                    ),
+                  ),
+                ]
+              ),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text('Your Garage'),
+                  IconButton(onPressed: lookIntoCar(), icon: ImageIcon(
+                    AssetImage('assets/Example_car.jpg'),
+                    size: 200,
+                    ),
+                  ),
+                ]
+              ),
+            ]
+        ),
+      ),
+    );
+  }
+
+  settings() {}
+
+  lookIntoCar() {}
 }
