@@ -114,15 +114,14 @@ class MainMenuScaffold extends State<MainMenuState> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-            children: <Widget>[
+        child: Column(children: <Widget>[
               new Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text("Hallo,", style:TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     Text("Benutzer", style:TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                    ]
+                  ]
               ),
               new Column(children: <Widget>[
                 new Row(
