@@ -121,6 +121,7 @@ class MainMenuScaffold extends State<MainMenuState> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
+                  SizedBox(height: 300),
                   IconButton(onPressed: settings(), icon: Icon(
                     Icons.settings,
                     ),
